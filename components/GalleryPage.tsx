@@ -39,19 +39,23 @@ const GalleryItem: React.FC<{ photo: PhotoItem; index: number }> = ({ photo, ind
       className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16 relative`}
     >
       <motion.div 
-        whileHover={{ scale: 1.03 }}
-        className="relative group w-full md:w-1/2 cursor-pointer"
+        whileHover={{ 
+          scale: 1.05,
+          boxShadow: "0 0 40px rgba(220, 38, 38, 0.4), 0 0 15px rgba(220, 38, 38, 0.2)"
+        }}
+        className="relative group w-full md:w-1/2 cursor-pointer transition-all duration-500 rounded-lg"
         style={{ y: smoothYImage }}
       >
-        <div className="absolute -inset-4 bg-red-600/0 group-hover:bg-red-600/20 rounded-3xl blur-2xl transition-all duration-700"></div>
+        {/* Side Glow Effects */}
+        <div className="absolute -inset-2 bg-red-600/0 group-hover:bg-red-600/10 rounded-3xl blur-2xl transition-all duration-700"></div>
         
         <motion.div 
-          className="relative bg-white p-3 md:p-4 pb-12 md:pb-16 shadow-2xl rounded-sm transform transition-all duration-500 border-[1px] border-transparent group-hover:border-red-200 group-hover:shadow-[0_0_30px_rgba(220,38,38,0.3)]"
+          className="relative bg-white p-3 md:p-4 pb-12 md:pb-16 shadow-2xl rounded-sm transform transition-all duration-500 border-[1px] border-transparent group-hover:border-red-400/30"
           style={{ rotate: rotateImage }}
         >
           <motion.div 
             initial={{ opacity: 0, scale: 0 }}
-            whileHover={{ opacity: 1, scale: 1 }}
+            whileHover={{ opacity: 1, scale: 1.2 }}
             className="absolute -top-3 -left-3 bg-red-600 text-white p-2 rounded-full shadow-lg z-30 pointer-events-none"
           >
             <Heart size={16} fill="currentColor" />
@@ -62,20 +66,25 @@ const GalleryItem: React.FC<{ photo: PhotoItem; index: number }> = ({ photo, ind
                <img 
                 src={photo.url} 
                 alt="Subhangee Mukherjee" 
-                className="w-full aspect-[3/4] object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-115"
+                className="w-full aspect-[3/4] object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-1000 scale-110 group-hover:scale-105"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = `https://picsum.photos/seed/fallback${index}/800/1000`;
                 }}
               />
             </motion.div>
-            <div className="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/10 transition-colors duration-700 pointer-events-none"></div>
+            {/* Subtle soft red glow overlay on hover */}
+            <div className="absolute inset-0 bg-red-600/0 group-hover:bg-red-600/5 transition-colors duration-700 pointer-events-none"></div>
           </div>
 
           <div className="absolute bottom-4 left-0 right-0 text-center">
             <motion.span 
+              whileHover={{ scale: 1.1, color: "#dc2626", textShadow: "0 0 15px rgba(220, 38, 38, 0.4)" }}
               animate={{ y: [0, -2, 0] }}
-              transition={{ repeat: Infinity, duration: 4, delay: index * 0.5 }}
-              className="font-romantic text-3xl md:text-4xl text-red-950/40 group-hover:text-red-600 transition-all duration-500 tracking-wider block"
+              transition={{ 
+                y: { repeat: Infinity, duration: 4, delay: index * 0.5 },
+                scale: { duration: 0.3 }
+              }}
+              className="font-romantic text-3xl md:text-4xl text-red-950/40 group-hover:text-red-600 transition-all duration-500 tracking-wider block cursor-default select-none"
             >
               {(index === 1 || index === 3) ? 'Kismis' : 'Rai'}
             </motion.span>
@@ -98,13 +107,30 @@ const GalleryItem: React.FC<{ photo: PhotoItem; index: number }> = ({ photo, ind
           >
             <Sparkles className="text-red-500 mb-4 mx-auto md:mx-0" size={20} />
           </motion.div>
-          <h3 className="font-playfair italic text-2xl md:text-3xl text-red-100 leading-relaxed font-light">
+          
+          <motion.h3 
+            whileHover={{ 
+              scale: 1.02, 
+              color: "#fca5a5", // Soft reddish pink hue (rose-300 / red-200)
+              textShadow: "0 0 15px rgba(252, 165, 165, 0.4)"
+            }}
+            className="font-playfair italic text-2xl md:text-3xl text-red-100 leading-relaxed font-light cursor-default select-none transition-all duration-500"
+          >
             "{photo.caption}"
-          </h3>
+          </motion.h3>
+
           <div className="h-[2px] w-20 bg-gradient-to-r from-red-800 to-transparent my-6 mx-auto md:mx-0"></div>
-          <p className="font-cinzel text-red-400 tracking-[0.3em] text-xs md:text-sm uppercase font-bold">
+          
+          <motion.p 
+            whileHover={{ 
+              letterSpacing: "0.6em", 
+              color: "#ef4444", 
+              textShadow: "0 0 10px rgba(239, 68, 68, 0.5)" 
+            }}
+            className="font-cinzel text-red-400 tracking-[0.3em] text-xs md:text-sm uppercase font-bold cursor-default select-none transition-all duration-500"
+          >
             {photo.sub}
-          </p>
+          </motion.p>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -156,12 +182,27 @@ const GalleryPage: React.FC<GalleryPageProps> = ({ onNext }) => {
         >
           <Heart size={60} className="text-red-600 fill-current mx-auto drop-shadow-[0_0_15px_rgba(220,38,38,0.5)]" />
         </motion.div>
-        <h2 className="font-romantic text-6xl md:text-8xl text-red-100 px-4 leading-tight">
+        
+        <motion.h2 
+          whileHover={{ 
+            scale: 1.05, 
+            textShadow: "0 0 30px rgba(255, 255, 255, 0.4)",
+            color: "#fff"
+          }}
+          className="font-romantic text-6xl md:text-8xl text-red-100 px-4 leading-tight cursor-default select-none transition-all duration-500"
+        >
           You are crazy... but you are mine
-        </h2>
-        <p className="font-cinzel text-red-400 tracking-[0.5em] text-sm uppercase mt-4">
+        </motion.h2>
+
+        <motion.p 
+          whileHover={{ 
+            letterSpacing: "0.8em", 
+            color: "#f87171" 
+          }}
+          className="font-cinzel text-red-400 tracking-[0.5em] text-sm uppercase mt-4 cursor-default select-none transition-all duration-700"
+        >
           Capturing the magic of Rai
-        </p>
+        </motion.p>
       </motion.div>
 
       <div className="w-full max-w-5xl space-y-32 md:space-y-64 z-20">
@@ -175,9 +216,12 @@ const GalleryPage: React.FC<GalleryPageProps> = ({ onNext }) => {
         whileInView={{ opacity: 1 }}
         className="mt-48 mb-32 text-center space-y-12 z-20"
       >
-        <p className="max-w-md mx-auto text-red-300/50 font-cinzel text-[10px] md:text-xs tracking-[0.5em] leading-relaxed px-4 uppercase mb-10">
-          Every moment with you is a new page of our favorite story. I love you, Rai. Forever yours.
-        </p>
+        <motion.p 
+          whileHover={{ scale: 1.05, color: "#fff", textShadow: "0 0 10px rgba(255,255,255,0.2)" }}
+          className="max-w-md mx-auto text-red-300/50 font-cinzel text-[10px] md:text-xs tracking-[0.5em] leading-relaxed px-4 uppercase mb-10 cursor-default select-none transition-all duration-500"
+        >
+          Every moment with you is a new page of our favorite story. I love you, Rai. This day is ours.
+        </motion.p>
 
         {onNext && (
           <motion.div 
@@ -190,14 +234,21 @@ const GalleryPage: React.FC<GalleryPageProps> = ({ onNext }) => {
               onClick={onNext}
               className="group relative px-10 md:px-16 py-8 bg-transparent border-[1px] border-red-500/20 text-red-100 rounded-3xl font-romantic hover:border-red-500/60 hover:text-white transition-all duration-700 shadow-[0_0_15px_rgba(220,38,38,0.1)] hover:shadow-[0_0_40px_rgba(220,38,38,0.4)] overflow-hidden"
             >
-              {/* Shimmer effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-red-600/0 via-red-600/10 to-red-600/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               
               <span className="relative z-10 block text-center leading-[1.3] select-none">
-                <span className="text-4xl md:text-6xl block">I love you Subhranil Ghosh</span>
-                <span className="text-xl md:text-3xl opacity-70 italic block mt-2 font-montserrat tracking-wide">
+                <motion.span 
+                  whileHover={{ scale: 1.1, textShadow: "0 0 20px rgba(220,38,38,0.6)" }}
+                  className="text-4xl md:text-6xl block transition-all"
+                >
+                  I love you Subhranil Ghosh
+                </motion.span>
+                <motion.span 
+                  whileHover={{ scale: 1.05, color: "#f87171" }}
+                  className="text-xl md:text-3xl opacity-70 italic block mt-2 font-montserrat tracking-wide transition-all"
+                >
                   I love you very very much
-                </span>
+                </motion.span>
               </span>
             </button>
           </motion.div>

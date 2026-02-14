@@ -9,30 +9,48 @@ interface NicknamePageProps {
 }
 
 const NicknamePage: React.FC<NicknamePageProps> = ({ onNext }) => {
-  // Added Variants type to prevent easing string literal widening
+  // Refined animation variants for deliberate impact
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.8,
-        delayChildren: 0.3,
+        staggerChildren: 1.5, // Significantly increased for storytelling impact
+        delayChildren: 1.0,
       },
     },
   };
 
-  // Added Variants type to fix 'string' is not assignable to 'Easing' error
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 50, filter: "blur(12px)" },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 1.2, ease: "easeOut" }
+      filter: "blur(0px)",
+      transition: { 
+        duration: 2.2, 
+        ease: [0.16, 1, 0.3, 1] 
+      }
     },
   };
 
+  const textGlowHover = {
+    scale: 1.08,
+    textShadow: [
+      "0 0 10px rgba(220, 38, 38, 0.4)",
+      "0 0 20px rgba(220, 38, 38, 0.6)",
+      "0 0 30px rgba(220, 38, 38, 0.4)"
+    ],
+    color: "#dc2626", // Red-600
+    transition: { 
+      type: "spring", 
+      stiffness: 300, 
+      damping: 15 
+    }
+  };
+
   return (
-    <div className="relative min-h-screen w-full bg-red-50 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto">
+    <div className="relative min-h-screen w-full bg-red-50 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto overflow-x-hidden">
       <Snowfall />
 
       <motion.div
@@ -60,17 +78,27 @@ const NicknamePage: React.FC<NicknamePageProps> = ({ onNext }) => {
           </p>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-white/40 backdrop-blur-sm p-8 rounded-2xl border border-red-100 shadow-xl max-w-2xl mx-auto text-center space-y-6">
-          <p className="font-montserrat text-lg text-red-950 font-medium italic">
+        {/* Enhanced Interactive Box */}
+        <motion.div 
+          variants={itemVariants}
+          whileHover={{ 
+            scale: 1.03,
+            boxShadow: "0 20px 60px rgba(220, 38, 38, 0.25), 0 0 30px rgba(220, 38, 38, 0.15)",
+            borderColor: "rgba(220, 38, 38, 0.4)",
+            backgroundColor: "rgba(255, 255, 255, 0.6)"
+          }}
+          className="bg-white/40 backdrop-blur-sm p-10 rounded-3xl border border-red-100 shadow-xl max-w-2xl mx-auto text-center space-y-6 cursor-pointer transition-all duration-500 group"
+        >
+          <p className="font-montserrat text-lg text-red-950 font-medium italic group-hover:text-red-900 transition-colors">
             All these years, people have been asking me since childhood,
           </p>
           <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="font-romantic text-5xl md:text-6xl text-red-600 drop-shadow-sm"
+            whileHover={textGlowHover}
+            className="font-romantic text-6xl md:text-7xl text-red-600 drop-shadow-sm select-none"
           >
             “Kaju… Kismis koi?” 😂
           </motion.div>
-          <p className="font-montserrat text-sm text-red-800/70 tracking-wide uppercase">
+          <p className="font-montserrat text-sm text-red-800/70 tracking-wide uppercase group-hover:text-red-600 transition-colors">
             And I guess life was just waiting for the right person to give that answer.
           </p>
         </motion.div>
@@ -87,34 +115,45 @@ const NicknamePage: React.FC<NicknamePageProps> = ({ onNext }) => {
         <motion.div variants={itemVariants} className="text-center space-y-8 pt-6">
           <div className="flex justify-center items-center gap-4">
             <Stars className="text-red-400 animate-pulse" />
-            <p className="font-cinzel text-red-900 tracking-widest text-sm">So here we are, today.</p>
+            <p className="font-cinzel text-red-900 tracking-widest text-sm uppercase">So here we are, today.</p>
             <Stars className="text-red-400 animate-pulse" />
           </div>
 
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 4.5, duration: 1.5, type: "spring" }}
+            transition={{ delay: 1, duration: 2, type: "spring", bounce: 0.4 }}
             className="space-y-4"
           >
-            <h2 className="font-romantic text-6xl md:text-8xl text-red-600 drop-shadow-lg">
+            <motion.h2 
+              whileHover={textGlowHover}
+              className="font-romantic text-6xl md:text-9xl text-red-600 drop-shadow-lg cursor-default select-none inline-block px-8 py-2"
+            >
               I finally have my Kismis ❤️
-            </h2>
+            </motion.h2>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 6 }}
+            transition={{ delay: 2.5, duration: 1.5 }}
             className="pt-12"
           >
-            <button 
+            <motion.button 
               onClick={onNext}
-              className="group flex items-center gap-3 px-12 py-4 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm hover:bg-red-700 transition-all shadow-xl hover:scale-105 active:scale-95 mx-auto"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 15px 35px rgba(220, 38, 38, 0.4)"
+              }}
+              whileTap={{ scale: 0.96 }}
+              className="group flex items-center gap-3 px-12 py-5 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm transition-all shadow-2xl mx-auto overflow-hidden relative"
             >
-              Continue Our Story
-              <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <span className="relative z-10 flex items-center gap-3">
+                Continue Our Story
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </motion.button>
           </motion.div>
         </motion.div>
       </motion.div>
@@ -123,12 +162,12 @@ const NicknamePage: React.FC<NicknamePageProps> = ({ onNext }) => {
       <motion.div 
         animate={{ 
           scale: [1, 1.2, 1],
-          rotate: [0, 5, -5, 0]
+          rotate: [0, 10, -10, 0]
         }}
-        transition={{ repeat: Infinity, duration: 8 }}
-        className="fixed bottom-10 left-10 opacity-10 pointer-events-none"
+        transition={{ repeat: Infinity, duration: 10 }}
+        className="fixed -bottom-20 -left-20 opacity-[0.05] pointer-events-none"
       >
-        <Heart size={150} fill="currentColor" className="text-red-900" />
+        <Heart size={400} fill="currentColor" className="text-red-900" />
       </motion.div>
     </div>
   );

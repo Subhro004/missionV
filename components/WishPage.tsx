@@ -17,6 +17,12 @@ const WishPage: React.FC<WishPageProps> = ({ onNext }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  const glowHover = {
+    scale: 1.05,
+    textShadow: "0 0 20px rgba(220, 38, 38, 0.6)",
+    transition: { duration: 0.3 }
+  };
+
   return (
     <div className="relative min-h-screen w-full bg-red-50 flex flex-col items-center justify-center p-6 overflow-hidden">
       {/* Background Heart Watermarks */}
@@ -40,16 +46,37 @@ const WishPage: React.FC<WishPageProps> = ({ onNext }) => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 1 }}
+              className="flex flex-col items-center"
             >
-              <h2 className="font-romantic text-6xl md:text-8xl text-red-600 drop-shadow-sm">
+              <motion.h2 
+                whileHover={glowHover}
+                className="font-romantic text-6xl md:text-8xl text-red-600 drop-shadow-sm cursor-default select-none"
+              >
                 Happy Valentine's Day
-              </h2>
+              </motion.h2>
+              
               <div className="flex items-center justify-center gap-4 mt-2">
-                <div className="h-[2px] w-16 bg-red-300"></div>
-                <h3 className="font-cinzel text-xl md:text-2xl text-red-900 tracking-[0.3em] font-semibold uppercase">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: 64 }}
+                  className="h-[2px] bg-red-300"
+                ></motion.div>
+                <motion.h3 
+                  whileHover={{ 
+                    scale: 1.1, 
+                    letterSpacing: "0.4em", 
+                    color: "#7f1d1d",
+                    textShadow: "0 0 10px rgba(127, 29, 29, 0.3)" 
+                  }}
+                  className="font-cinzel text-xl md:text-2xl text-red-900 tracking-[0.3em] font-semibold uppercase cursor-default select-none transition-all duration-300"
+                >
                   My Dearest Subhangee
-                </h3>
-                <div className="h-[2px] w-16 bg-red-300"></div>
+                </motion.h3>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: 64 }}
+                  className="h-[2px] bg-red-300"
+                ></motion.div>
               </div>
             </motion.div>
 
@@ -88,9 +115,16 @@ const WishPage: React.FC<WishPageProps> = ({ onNext }) => {
               transition={{ delay: 1, duration: 1.5 }}
               className="max-w-2xl px-4 flex flex-col items-center gap-10"
             >
-              <p className="font-playfair italic text-2xl md:text-3xl text-red-900 leading-relaxed drop-shadow-sm">
+              <motion.p 
+                whileHover={{ 
+                  scale: 1.03, 
+                  color: "#991b1b",
+                  textShadow: "0 0 15px rgba(220, 38, 38, 0.2)"
+                }}
+                className="font-playfair italic text-2xl md:text-3xl text-red-900 leading-relaxed drop-shadow-sm cursor-default select-none transition-colors duration-300"
+              >
                 "You are my coincidence that felt like destiny"
-              </p>
+              </motion.p>
               
               <motion.div 
                 className="flex flex-col items-center gap-6"
@@ -110,19 +144,35 @@ const WishPage: React.FC<WishPageProps> = ({ onNext }) => {
                   }}
                 >
                   <Stars className="text-red-400" />
-                  <span className="font-romantic text-4xl md:text-5xl text-red-600 drop-shadow-sm px-2">
-                    Forever and Always, Yours
-                  </span>
+                  <motion.span 
+                    whileHover={{ 
+                      scale: 1.2, 
+                      rotate: [-1, 1, -1],
+                      textShadow: "0 0 25px rgba(220, 38, 38, 0.8)"
+                    }}
+                    className="font-romantic text-4xl md:text-5xl text-red-600 drop-shadow-sm px-2 cursor-default select-none"
+                  >
+                    Only yours
+                  </motion.span>
                   <Stars className="text-red-400" />
                 </motion.div>
 
-                <button 
+                <motion.button 
                   onClick={onNext}
-                  className="group flex items-center gap-3 px-8 py-3 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm hover:bg-red-700 transition-all shadow-lg hover:shadow-red-200"
+                  whileHover={{ 
+                    scale: 1.08,
+                    boxShadow: "0 12px 24px rgba(220, 38, 38, 0.3)"
+                  }}
+                  whileTap={{ scale: 0.96 }}
+                  className="group flex items-center gap-3 px-8 py-3 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm transition-all shadow-lg"
                 >
-                  Explore More
-                  <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </button>
+                  <motion.span
+                    className="flex items-center gap-3"
+                  >
+                    Explore More
+                    <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </motion.span>
+                </motion.button>
               </motion.div>
             </motion.div>
           </motion.div>

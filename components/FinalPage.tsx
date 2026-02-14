@@ -35,7 +35,7 @@ const FinalPage: React.FC<FinalPageProps> = ({ onNext }) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
         className="z-20 text-center relative"
       >
         {/* Decorative Sparkles */}
@@ -59,9 +59,9 @@ const FinalPage: React.FC<FinalPageProps> = ({ onNext }) => {
         <div className="space-y-6">
           <motion.button
             onClick={onNext}
-            initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+            initial={{ opacity: 0, scale: 0.9, filter: "blur(15px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 2.5, ease: "easeOut" }}
+            transition={{ duration: 3.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="bg-transparent border-none p-0 m-0 cursor-pointer block w-full focus:outline-none group"
@@ -70,9 +70,9 @@ const FinalPage: React.FC<FinalPageProps> = ({ onNext }) => {
               I love you
             </h1>
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 2 }}
+              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 3.5, duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               className="font-romantic text-5xl md:text-7xl text-red-300 mt-2 tracking-wide"
             >
               Subhangee Mukherjee
@@ -83,7 +83,7 @@ const FinalPage: React.FC<FinalPageProps> = ({ onNext }) => {
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
-            transition={{ delay: 3, duration: 1.5 }}
+            transition={{ delay: 5.5, duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
             className="h-[1px] bg-gradient-to-r from-transparent via-red-400 to-transparent mx-auto mt-12"
           />
         </div>

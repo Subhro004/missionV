@@ -9,25 +9,27 @@ interface FinalLetterPageProps {
 }
 
 const FinalLetterPage: React.FC<FinalLetterPageProps> = ({ onNext }) => {
-  // Added Variants type to prevent easing string literal widening
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5,
+        staggerChildren: 0.9, // More impactful, deliberate pacing
+        delayChildren: 1.2,
       },
     },
   };
 
-  // Added Variants type to fix 'string' is not assignable to 'Easing' error
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 40, filter: "blur(12px)" },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 1.2, ease: "easeOut" }
+      filter: "blur(0px)",
+      transition: { 
+        duration: 2.0, 
+        ease: [0.16, 1, 0.3, 1] 
+      }
     },
   };
 

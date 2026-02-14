@@ -36,6 +36,13 @@ const QuotePage: React.FC<QuotePageProps> = ({ onNext }) => {
 
   const imageUrl = "https://drive.google.com/thumbnail?id=1m-klDLwRVmm73GGH2GpUwFuIYzxy1XD9&sz=w1600";
 
+  const glowHover = {
+    scale: 1.05,
+    textShadow: "0 0 20px rgba(254, 202, 202, 0.6)",
+    color: "#ffffff",
+    transition: { duration: 0.4 }
+  };
+
   return (
     <div className="relative min-h-screen w-full bg-[#050101] flex flex-col items-center justify-start py-20 px-8 overflow-y-auto overflow-x-hidden">
       <Snowfall />
@@ -55,9 +62,12 @@ const QuotePage: React.FC<QuotePageProps> = ({ onNext }) => {
           className="relative"
         >
           <div className="absolute -inset-10 bg-red-600/5 blur-3xl rounded-full"></div>
-          <p className="font-playfair italic text-3xl md:text-5xl text-red-50 leading-[1.6] relative z-10 drop-shadow-lg">
+          <motion.p 
+            whileHover={{ scale: 1.02, color: "#fff" }}
+            className="font-playfair italic text-3xl md:text-5xl text-red-50 leading-[1.6] relative z-10 drop-shadow-lg cursor-default select-none"
+          >
             "I don't need a Valentine's Day or Valentine's Week to love you, I love you always."
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Interactive Image Container */}
@@ -115,12 +125,18 @@ const QuotePage: React.FC<QuotePageProps> = ({ onNext }) => {
           transition={{ delay: 1, duration: 1.5 }}
           className="space-y-6"
         >
-          <p className="font-montserrat text-xl md:text-2xl text-red-200/80 font-light leading-relaxed">
+          <motion.p 
+            whileHover={glowHover}
+            className="font-montserrat text-xl md:text-2xl text-red-200/80 font-light leading-relaxed cursor-default select-none"
+          >
             Hope this little effort sneaks me into your dreams and makes you think of me in sleep...
-          </p>
-          <p className="font-romantic text-3xl md:text-4xl text-red-400 opacity-70 italic">
+          </motion.p>
+          <motion.p 
+            whileHover={{ scale: 1.1, color: "#f87171" }}
+            className="font-romantic text-3xl md:text-4xl text-red-400 opacity-70 italic cursor-default select-none transition-all duration-300"
+          >
             (Jege jege to tui bhabis na ki r korbo)
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* End of Beginning Button */}

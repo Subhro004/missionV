@@ -73,13 +73,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
         transition={{ delay: 0.5, duration: 1 }}
         className="z-40"
       >
-        <button
+        <motion.button
           onClick={onNext}
-          className="group relative flex flex-col items-center gap-6 transition-all hover:scale-105"
+          whileHover={{ 
+            scale: 1.05,
+            boxShadow: "0 20px 40px rgba(239, 68, 68, 0.2)"
+          }}
+          whileTap={{ scale: 0.98 }}
+          className="group relative flex flex-col items-center gap-6 transition-all"
         >
-          <div className="relative px-14 py-6 bg-white/80 backdrop-blur-md shadow-[0_20px_50px_rgba(239,68,68,0.15)] border border-red-100 rounded-full overflow-hidden transition-all duration-700 hover:shadow-red-200/50">
-            <span className="relative z-10 font-cinzel text-red-950 text-sm md:text-lg tracking-[0.4em] uppercase font-bold">
-              Let's embark on this journey
+          <div className="relative px-10 md:px-14 py-6 bg-white/80 backdrop-blur-md border border-red-100 rounded-full overflow-hidden transition-all duration-700">
+            <span className="relative z-10 font-cinzel text-red-950 text-sm md:text-lg tracking-[0.4em] uppercase font-bold text-center block max-w-xs md:max-w-none">
+              Let's embark on this dreamy journey together
             </span>
             <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 bg-red-50 transition-transform duration-500 ease-in-out"></div>
           </div>
@@ -93,7 +98,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
           >
             <Heart size={32} className="text-red-600 fill-current" />
           </motion.div>
-        </button>
+        </motion.button>
       </motion.div>
 
       {/* Bottom Right Message: Enhanced visibility and interactivity */}

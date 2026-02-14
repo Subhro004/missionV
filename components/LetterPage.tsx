@@ -9,39 +9,57 @@ interface LetterPageProps {
 }
 
 const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
-  // Animation variants for staggered text reveal
-  // Added Variants type to prevent easing string literal widening
+  // Refined animation variants for smoother staggered reveal
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.5,
+        staggerChildren: 1.0, // Increased for deliberate, cinematic reading
+        delayChildren: 1.4,
       },
     },
   };
 
-  // Added Variants type to fix 'string' is not assignable to 'Easing' error
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 1, ease: "easeOut" }
+      filter: "blur(0px)",
+      transition: { 
+        duration: 2.0, 
+        ease: [0.16, 1, 0.3, 1] // Smooth easeOutExpo
+      }
     },
   };
 
-  const interactiveTextClass = "cursor-default hover:text-red-600 transition-all duration-300 inline-block drop-shadow-sm";
+  const sentenceHover = {
+    scale: 1.02,
+    x: 10,
+    color: "#dc2626", // Red-600
+    textShadow: "0 0 15px rgba(220, 38, 38, 0.2)",
+    transition: { type: "spring", stiffness: 300, damping: 20 }
+  };
+
+  // Helper component for interactive sentences
+  const InteractiveSentence: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = "" }) => (
+    <motion.span 
+      whileHover={sentenceHover}
+      className={`inline-block cursor-default transition-colors duration-300 drop-shadow-sm origin-left ${className}`}
+    >
+      {children}
+    </motion.span>
+  );
 
   return (
     <div className="relative min-h-screen w-full bg-red-50 flex flex-col items-center justify-center p-6 md:p-12 overflow-y-auto overflow-x-hidden">
       <Snowfall />
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-20 w-full max-w-3xl bg-white/80 backdrop-blur-md p-8 md:p-16 rounded-3xl shadow-2xl border border-red-100 my-10"
       >
         {/* Letter Ornament */}
@@ -53,11 +71,14 @@ const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.5, duration: 2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="font-romantic text-5xl md:text-7xl text-red-600 leading-tight">
+            <motion.h1 
+              whileHover={{ scale: 1.02, color: "#991b1b" }}
+              className="font-romantic text-5xl md:text-7xl text-red-600 leading-tight cursor-default select-none"
+            >
               For my Sweetest distraction...
-            </h1>
+            </motion.h1>
           </motion.div>
 
           {/* Staggered Text Reveal */}
@@ -65,54 +86,67 @@ const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="font-montserrat text-base md:text-lg text-red-950 leading-[1.8] space-y-6 font-medium tracking-tight"
+            className="font-montserrat text-base md:text-lg text-red-950 leading-[2] space-y-8 font-medium tracking-tight"
           >
-            <motion.p variants={itemVariants}>
-              <span className={interactiveTextClass}>I think this is the perfect day to go back to that night —</span><br />
+            <motion.p variants={itemVariants} className="flex flex-col gap-2">
+              <InteractiveSentence>I think this is the perfect day to go back to that night —</InteractiveSentence>
               <motion.strong 
-                whileHover={{ scale: 1.05, color: "#991b1b" }}
-                className="font-bold text-red-800 cursor-pointer transition-transform inline-block"
+                whileHover={{ scale: 1.08, color: "#991b1b", x: 15 }}
+                className="font-bold text-red-800 cursor-pointer transition-all inline-block origin-left text-xl md:text-2xl"
               >
                 30th August 2025, Saturday.
-              </motion.strong><br />
-              <span className={interactiveTextClass}>Your last 4th sem exam… Computer.</span>
+              </motion.strong>
+              <InteractiveSentence>Your last 4th sem exam… Computer.</InteractiveSentence>
             </motion.p>
 
             <motion.p variants={itemVariants}>
-              <span className={interactiveTextClass}>After that you went shopping at Garia, remember?</span>
+              <InteractiveSentence>After that you went shopping at Garia, remember?</InteractiveSentence>
             </motion.p>
 
-            <motion.p variants={itemVariants}>
-              <span className={interactiveTextClass}>Then you came home — sobai chilo… ma, baba, mistimoni, papel — all watching TV together.</span><br />
-              <span className={interactiveTextClass}>And in the middle of all that, you were busy doing just one thing…</span><br />
-              <span className={interactiveTextClass}>relieving me of my misery with four simple words:</span>
+            <motion.p variants={itemVariants} className="flex flex-col gap-2">
+              <InteractiveSentence>Then you came home — sobai chilo… ma, baba, mistimoni, papel — all watching TV together.</InteractiveSentence>
+              <InteractiveSentence>And in the middle of all that, you were busy doing just one thing…</InteractiveSentence>
+              <InteractiveSentence>relieving me of my misery with four simple words:</InteractiveSentence>
             </motion.p>
             
-            <motion.p variants={itemVariants} className="text-center py-4">
+            <motion.p variants={itemVariants} className="text-center py-6">
               <motion.span 
-                whileHover={{ scale: 1.15, rotate: [0, -1, 1, 0] }}
-                className="text-red-600 font-bold italic underline decoration-red-300 underline-offset-8 cursor-help px-4 py-2 inline-block transition-transform text-3xl md:text-4xl"
+                whileHover={{ 
+                  scale: 1.2, 
+                  rotate: [-1, 1, -1, 0],
+                  textShadow: "0 0 25px rgba(220, 38, 38, 0.4)"
+                }}
+                className="text-red-600 font-bold italic underline decoration-red-300 underline-offset-8 cursor-heart px-6 py-2 inline-block transition-all text-4xl md:text-5xl"
               >
                 “The answer is yes.”
               </motion.span>
             </motion.p>
 
-            <motion.p variants={itemVariants}>
-              <span className={interactiveTextClass}>I won’t hide it today, I won’t deny it —</span><br />
-              <span className={interactiveTextClass}>I was overjoyed. Super happy.</span><br />
-              <span className={interactiveTextClass}>So peaceful that I literally fell asleep smiling like a kid.</span><br />
-              <span className={interactiveTextClass}>And when I woke up the next morning… everything still felt unreal.</span>
-            </motion.p>
-
-            <motion.p variants={itemVariants} className="font-bold text-red-800 italic text-xl">
-              But that was just the beginning.
+            <motion.p variants={itemVariants} className="flex flex-col gap-2">
+              <InteractiveSentence>I won’t hide it today, I won’t deny it —</InteractiveSentence>
+              <InteractiveSentence>I was overjoyed. Super happy.</InteractiveSentence>
+              <InteractiveSentence>So peaceful that I literally fell asleep smiling like a kid.</InteractiveSentence>
+              <InteractiveSentence>And when I woke up the next morning… everything still felt unreal.</InteractiveSentence>
             </motion.p>
 
             <motion.p variants={itemVariants}>
-              <span className={interactiveTextClass}>Because from that day onwards…</span><br />
               <motion.span 
-                whileHover={{ scale: 1.05, textShadow: "0 0 8px rgba(220, 38, 38, 0.4)" }}
-                className="text-red-700 font-bold italic transition-all inline-block text-xl md:text-2xl mt-2"
+                whileHover={{ scale: 1.05, x: 10, color: "#7f1d1d" }}
+                className="font-bold text-red-800 italic text-2xl inline-block transition-all cursor-default"
+              >
+                But that was just the beginning.
+              </motion.span>
+            </motion.p>
+
+            <motion.p variants={itemVariants}>
+              <InteractiveSentence>Because from that day onwards…</InteractiveSentence><br />
+              <motion.span 
+                whileHover={{ 
+                  scale: 1.05, 
+                  textShadow: "0 0 12px rgba(220, 38, 38, 0.5)",
+                  color: "#dc2626"
+                }}
+                className="text-red-700 font-bold italic transition-all inline-block text-2xl md:text-3xl mt-4"
               >
                 I kept falling more and more in love with you
               </motion.span>.
@@ -124,27 +158,38 @@ const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
              initial={{ opacity: 0, scale: 0.9 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             transition={{ delay: 3.5 }}
-             className="pt-6 border-t border-red-50"
+             transition={{ delay: 3.5, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+             className="pt-8 border-t border-red-100"
           >
-            <p className="font-bold text-xl md:text-2xl font-romantic text-red-800 hover:text-red-600 transition-colors duration-500 cursor-default">
+            <motion.p 
+              whileHover={{ scale: 1.02, color: "#991b1b" }}
+              className="font-bold text-2xl md:text-3xl font-romantic text-red-800 transition-colors duration-500 cursor-default leading-tight"
+            >
               The Day superlajuk pro max Subhangee put me out of my misery.
-            </p>
+            </motion.p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 4.5 }}
+            transition={{ delay: 5.5, duration: 1 }}
             className="pt-6 flex justify-center"
           >
-            <button 
+            <motion.button 
               onClick={onNext}
-              className="group flex items-center gap-3 px-10 py-4 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm hover:bg-red-700 transition-all shadow-xl hover:scale-105 active:scale-95"
+              whileHover={{ 
+                scale: 1.05,
+                boxShadow: "0 15px 35px rgba(220, 38, 38, 0.3)"
+              }}
+              whileTap={{ scale: 0.96 }}
+              className="group flex items-center gap-3 px-10 py-5 bg-red-600 text-white rounded-full font-cinzel tracking-widest text-sm transition-all shadow-xl overflow-hidden relative"
             >
-              Continue Our Journey
-              <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+              <span className="relative z-10 flex items-center gap-3">
+                Continue Our Journey
+                <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </motion.button>
           </motion.div>
         </div>
 
@@ -152,9 +197,9 @@ const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
         <motion.div 
           animate={{ rotate: [12, 18, 12], scale: [1, 1.1, 1] }}
           transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-          className="absolute -bottom-10 -right-10 opacity-10 pointer-events-none"
+          className="absolute -bottom-10 -right-10 opacity-[0.05] pointer-events-none"
         >
-          <Heart size={200} className="text-red-900" />
+          <Heart size={250} className="text-red-900" />
         </motion.div>
       </motion.div>
 
