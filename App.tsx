@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LandingPage from './components/LandingPage';
 import WishPage from './components/WishPage';
 import LetterPage from './components/LetterPage';
@@ -15,6 +15,11 @@ import WrapUpPage from './components/WrapUpPage';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'landing' | 'wish' | 'letter' | 'nickname' | 'gallery' | 'final' | 'final-letter' | 'detailed-letter' | 'collage' | 'special-image' | 'quote' | 'wrap-up'>('landing');
+
+  // Reset scroll position to top whenever the page changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return (
     <div className="min-h-screen bg-rose-50 overflow-x-hidden overflow-y-auto relative">
