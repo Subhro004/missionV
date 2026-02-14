@@ -42,23 +42,11 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
     y.set(0);
   };
 
-  // Granular content for more impactful reveal
-  const letterParts = useMemo(() => [
-    "I have an endless list of things I want to say to you.",
-    "Thank you for existing in my life not just today or tomorrow, but every day… every hour… every minute… every second.",
-    "When everything feels uncertain, I want you to always be certain of me.",
-    "I will stand by you always.",
-    "I want to be your support system, your safe place, your lifeline — just like you are mine.",
-    "I will always be the man you can tell everything to, trust blindly, and never fear being judged.",
-    "And always come to me when you need a break from the world.",
-    "I will also always be the lovable idiot who roasts you the best, annoys you the most and cares for you the deepest.",
-    "And you will always be the girl who laughs at my lame jokes, scolds me for my recklessness, and gets mad at my stupidness.",
-    "I will always be the man you tell your jokes and you deepest thoughts to.",
-    "You will always the woman I will tell the most random useless things of my day… and share each other's every detail.",
-    "I promise to keep flirting with you every day, to never stop doing cute little things for you.",
-    "When you blush, I will make you blush harder.",
-    "And yes, you can keep scolding and hitting me (thats your love language 😂)…",
-    "bas please, try not to break my head daily."
+  // Grouped content into paragraphs as requested
+  const letterParagraphs = useMemo(() => [
+    "I have an endless list of things I want to say to you. Thank you for existing in my life not just today or tomorrow, but every day… every hour… every minute… every second.",
+    "When everything feels uncertain, I want you to always be certain of me. I will stand by you always. I want to be your support system, your safe place, your lifeline — just like you are mine. I will always be the man you can tell everything to, trust blindly, and never fear being judged. And always come to me when you need a break from the world. I will also always be the lovable idiot who roasts you the best, annoys you the most and cares for you the deepest. And you will always be the girl who laughs at my lame jokes, scolds me for my recklessness, and gets mad at my stupidness. I will always be the man you tell your jokes and you deepest thoughts to. You will always the woman I will tell the most random useless things of my day… and share each other's every detail.",
+    "I promise to keep flirting with you every day, to never stop doing cute little things for you. When you blush, I will make you blush harder. And yes, you can keep scolding and hitting me (thats your love language 😂)… bas please, try not to break my head daily."
   ], []);
 
   const containerVariants: Variants = {
@@ -75,9 +63,9 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
       y: 0,
       transition: {
         duration: 2,
-        staggerChildren: 1.2, // More deliberate and impactful reading pace
+        staggerChildren: 1.2, 
         delayChildren: 1.8,
-        ease: [0.16, 1, 0.3, 1] // Cinematic easeOutExpo
+        ease: [0.16, 1, 0.3, 1] 
       },
     },
   };
@@ -95,7 +83,7 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
       filter: "blur(0px)",
       scale: 1,
       transition: { 
-        duration: 2.5, // Even smoother, longer entrance
+        duration: 2.5, 
         ease: [0.16, 1, 0.3, 1] 
       }
     },
@@ -133,7 +121,7 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
             rotateY,
             transformStyle: "preserve-3d",
           }}
-          className="relative w-full space-y-8 bg-white/5 backdrop-blur-2xl p-8 md:p-14 rounded-[3.5rem] border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.7)] group transition-all duration-1000"
+          className="relative w-full space-y-8 bg-white/5 backdrop-blur-2xl p-8 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.7)] group transition-all duration-1000"
         >
           {/* Main Pulsing Glow Effect */}
           <motion.div 
@@ -146,7 +134,7 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
               ]
             }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-0 rounded-[3.5rem] pointer-events-none z-0"
+            className="absolute inset-0 rounded-[2.5rem] md:rounded-[3.5rem] pointer-events-none z-0"
           />
 
           {/* Dynamic Interactive Light Spot */}
@@ -155,7 +143,7 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
               background: `radial-gradient(circle at ${glowX} ${glowY}, rgba(255,255,255,0.15) 0%, transparent 60%)`,
               transform: "translateZ(120px)"
             }}
-            className="absolute inset-0 pointer-events-none rounded-[3.5rem] z-0"
+            className="absolute inset-0 pointer-events-none rounded-[2.5rem] md:rounded-[3.5rem] z-0"
           />
 
           <motion.div variants={itemVariants} className="flex justify-center mb-6" style={{ transform: "translateZ(60px)" }}>
@@ -177,17 +165,17 @@ const DetailedLetterPage: React.FC<DetailedLetterPageProps> = ({ onNext }) => {
           </motion.h2>
 
           <motion.div 
-            className="font-playfair italic text-lg md:text-xl text-red-100/95 leading-relaxed space-y-6 relative z-10"
+            className="font-playfair italic text-lg md:text-xl text-red-100/95 leading-relaxed space-y-8 relative z-10"
             style={{ transform: "translateZ(90px)" }}
           >
-            {letterParts.map((text, idx) => (
+            {letterParagraphs.map((para, idx) => (
               <motion.p 
                 key={idx}
                 variants={itemVariants}
                 whileHover="hover"
                 className="cursor-default select-none transition-colors duration-500 drop-shadow-sm"
               >
-                {text}
+                {para}
               </motion.p>
             ))}
           </motion.div>

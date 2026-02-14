@@ -57,7 +57,7 @@ const InteractivePhoto: React.FC<InteractivePhotoProps> = ({ imageUrl, label = "
         transformStyle: "preserve-3d",
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative w-[300px] h-[400px] md:w-[400px] md:h-[530px] rounded-2xl bg-white shadow-[0_30px_60px_rgba(0,0,0,0.12)] cursor-pointer overflow-hidden group"
+      className="relative w-[85vw] max-w-[300px] h-auto aspect-[3/4] md:w-[400px] md:h-[530px] rounded-2xl bg-white shadow-[0_30px_60px_rgba(0,0,0,0.12)] cursor-pointer overflow-hidden group mx-auto"
     >
       {/* Dynamic Glare Overlay */}
       <motion.div
@@ -89,7 +89,7 @@ const InteractivePhoto: React.FC<InteractivePhotoProps> = ({ imageUrl, label = "
           scale: { repeat: Infinity, duration: 3, ease: "easeInOut" },
           boxShadow: { repeat: Infinity, duration: 2.5, ease: "easeInOut" }
         }}
-        className="absolute inset-4 rounded-xl border-2 z-20 pointer-events-none transition-colors duration-700"
+        className="absolute inset-2 md:inset-4 rounded-xl border-2 z-20 pointer-events-none transition-colors duration-700"
       />
       
       {/* Main Image Layer with Color Shift Animation */}
@@ -111,7 +111,7 @@ const InteractivePhoto: React.FC<InteractivePhotoProps> = ({ imageUrl, label = "
       {/* Depth-aware Text */}
       <div 
         style={{ transform: "translateZ(120px)" }}
-        className="absolute bottom-10 left-0 right-0 text-center z-40"
+        className="absolute bottom-6 md:bottom-10 left-0 right-0 text-center z-40"
       >
         <motion.p 
           animate={isHovered ? { 
@@ -119,7 +119,7 @@ const InteractivePhoto: React.FC<InteractivePhotoProps> = ({ imageUrl, label = "
             textShadow: ["0 4px 8px rgba(0,0,0,0.5)", "0 4px 15px rgba(220,38,38,0.8)", "0 4px 8px rgba(0,0,0,0.5)"]
           } : {}}
           transition={{ repeat: Infinity, duration: 3 }}
-          className="font-cinzel text-white text-base md:text-xl font-bold tracking-[0.1em] opacity-0 group-hover:opacity-100 transition-all duration-700 uppercase translate-y-4 group-hover:translate-y-0 px-4"
+          className="font-cinzel text-white text-xs md:text-xl font-bold tracking-[0.1em] opacity-0 group-hover:opacity-100 transition-all duration-700 uppercase translate-y-4 group-hover:translate-y-0 px-4"
         >
           {label}
         </motion.p>

@@ -10,7 +10,7 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
   return (
-    <div className="relative h-screen w-full bg-red-50 overflow-hidden flex items-center justify-center">
+    <div className="relative min-h-screen h-screen w-full bg-red-50 overflow-hidden flex items-center justify-center">
       {/* Background Snowfall - Same as Nickname page */}
       <Snowfall />
 
@@ -45,13 +45,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute top-10 left-10 md:top-16 md:left-16 z-30"
+        className="absolute top-4 left-4 md:top-16 md:left-16 z-30"
       >
         <motion.div 
           whileHover={{ scale: 1.1, x: 10 }}
           className="relative group cursor-default"
         >
-          <h2 className="font-romantic text-4xl md:text-6xl text-red-800 tracking-tight leading-tight group-hover:text-red-600 transition-colors duration-500 drop-shadow-sm">
+          <h2 className="font-romantic text-3xl md:text-6xl text-red-800 tracking-tight leading-tight group-hover:text-red-600 transition-colors duration-500 drop-shadow-sm">
             From <span className="italic">"Coat of Justice"</span>...
           </h2>
           <motion.div 
@@ -60,9 +60,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
             transition={{ delay: 1.2, duration: 1 }}
             className="h-[2px] bg-red-300 mt-2 group-hover:bg-red-500 transition-colors duration-500"
           />
-          <p className="font-cinzel text-[10px] md:text-xs text-red-400 tracking-[0.3em] uppercase mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            A small beginning
-          </p>
         </motion.div>
       </motion.div>
 
@@ -71,7 +68,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.5, duration: 1 }}
-        className="z-40"
+        className="z-40 px-6"
       >
         <motion.button
           onClick={onNext}
@@ -80,10 +77,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
             boxShadow: "0 20px 40px rgba(239, 68, 68, 0.2)"
           }}
           whileTap={{ scale: 0.98 }}
-          className="group relative flex flex-col items-center gap-6 transition-all"
+          className="group relative flex flex-col items-center gap-4 md:gap-6 transition-all"
         >
-          <div className="relative px-10 md:px-14 py-6 bg-white/80 backdrop-blur-md border border-red-100 rounded-full overflow-hidden transition-all duration-700">
-            <span className="relative z-10 font-cinzel text-red-950 text-sm md:text-lg tracking-[0.4em] uppercase font-bold text-center block max-w-xs md:max-w-none">
+          <div className="relative px-6 md:px-14 py-4 md:py-6 bg-white/80 backdrop-blur-md border border-red-100 rounded-full overflow-hidden transition-all duration-700">
+            <span className="relative z-10 font-cinzel text-red-950 text-xs md:text-lg tracking-[0.2em] md:tracking-[0.4em] uppercase font-bold text-center block max-w-xs md:max-w-none">
               Let's embark on this dreamy journey together
             </span>
             <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 bg-red-50 transition-transform duration-500 ease-in-out"></div>
@@ -96,7 +93,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
             }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            <Heart size={32} className="text-red-600 fill-current" />
+            <Heart size={28} md-size={32} className="text-red-600 fill-current" />
           </motion.div>
         </motion.button>
       </motion.div>
@@ -106,13 +103,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
-        className="absolute bottom-10 right-10 md:bottom-16 md:right-16 z-30 text-right"
+        className="absolute bottom-4 right-4 md:bottom-16 md:right-16 z-30 text-right"
       >
         <motion.div 
           whileHover={{ scale: 1.1, x: -10 }}
           className="relative group cursor-default"
         >
-          <h2 className="font-romantic text-4xl md:text-6xl text-red-800 tracking-tight leading-tight italic group-hover:text-red-600 transition-colors duration-500 drop-shadow-sm">
+          <h2 className="font-romantic text-3xl md:text-6xl text-red-800 tracking-tight leading-tight italic group-hover:text-red-600 transition-colors duration-500 drop-shadow-sm">
             ...to <span className="not-italic font-bold">"You are mine"</span>
           </h2>
           <div className="flex justify-end">
@@ -123,9 +120,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNext }) => {
               className="h-[2px] bg-red-300 mt-2 group-hover:bg-red-500 transition-colors duration-500"
             />
           </div>
-          <p className="font-cinzel text-[10px] md:text-xs text-red-400 tracking-[0.3em] uppercase mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            A beautiful destiny
-          </p>
         </motion.div>
       </motion.div>
 

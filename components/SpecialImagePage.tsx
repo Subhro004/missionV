@@ -52,7 +52,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#0a0202] flex flex-col items-center justify-center p-6 overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[#0a0202] flex flex-col items-center justify-center p-6 overflow-x-hidden">
       <Snowfall />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(220,38,38,0.12)_0%,_transparent_75%)] pointer-events-none"></div>
 
@@ -60,7 +60,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="z-20 w-full max-w-4xl flex flex-col items-center gap-12"
+        className="z-20 w-full max-w-4xl flex flex-col items-center gap-8 md:gap-12 py-10"
       >
         <div 
           className="perspective-2000 w-full flex justify-center items-center relative"
@@ -104,7 +104,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
                 ? "0 60px 100px rgba(0,0,0,0.9), 0 0 40px rgba(220, 38, 38, 0.2)" 
                 : "0 40px 80px rgba(0,0,0,0.7)"
             }}
-            className="relative w-full max-w-[600px] rounded-[3rem] overflow-hidden border border-white/5 bg-red-950/10 z-10 transition-shadow duration-700"
+            className="relative w-[90vw] max-w-[500px] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/5 bg-red-950/10 z-10 transition-shadow duration-700"
           >
             {/* Glossy Reflection Overlay */}
             <motion.div
@@ -118,14 +118,14 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
             {/* Subtle Inner Frame */}
             <motion.div 
               style={{ transform: "translateZ(60px)" }}
-              className="absolute inset-6 rounded-[2.5rem] border border-white/10 z-20 pointer-events-none"
+              className="absolute inset-4 md:inset-6 rounded-[1.5rem] md:rounded-[2.5rem] border border-white/5 z-20 pointer-events-none"
             />
 
             <motion.img 
               src={imageUrl} 
               alt="Peaceful Us" 
               style={{ transform: "translateZ(30px)" }}
-              className="w-full h-auto object-contain relative z-10 block rounded-[3rem] transition-transform duration-1000"
+              className="w-full h-auto object-contain relative z-10 block rounded-[2rem] md:rounded-[3rem] transition-transform duration-1000"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://picsum.photos/800/1000?romantic=1";
               }}
@@ -171,9 +171,9 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="flex flex-col items-center gap-10"
+          className="flex flex-col items-center gap-6 md:gap-10 px-4"
         >
-          <div className="flex items-center gap-4 cursor-default">
+          <div className="flex items-center gap-3 md:gap-4 cursor-default">
             <motion.div 
               animate={isTextHovered ? { rotate: 180, scale: 1.2, color: "#fff" } : { rotate: 0, scale: 1 }}
               transition={{ duration: 0.8 }}
@@ -185,7 +185,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
               onMouseEnter={() => setIsTextHovered(true)}
               onMouseLeave={() => setIsTextHovered(false)}
               whileHover={textGlowEffect}
-              className="font-romantic text-4xl md:text-5xl text-red-100 text-center select-none cursor-pointer tracking-wide transition-all duration-500"
+              className="font-romantic text-3xl md:text-5xl text-red-100 text-center select-none cursor-pointer tracking-wide transition-all duration-500 leading-tight"
             >
               I love the quiet peaceful us moments
             </motion.h3>
@@ -208,7 +208,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
               transition: { duration: 0.3 }
             }}
             whileTap={{ scale: 0.95 }}
-            className="group relative flex items-center gap-5 px-12 py-5 bg-red-600/20 border border-red-500/30 text-red-100 rounded-full font-cinzel tracking-widest text-xs uppercase transition-all duration-500 shadow-lg overflow-hidden"
+            className="group relative flex items-center gap-5 px-10 md:px-12 py-4 md:py-5 bg-red-600/20 border border-red-500/30 text-red-100 rounded-full font-cinzel tracking-widest text-[10px] md:text-xs uppercase transition-all duration-500 shadow-lg overflow-hidden"
           >
             <span className="relative z-10 flex items-center gap-5">
               Continue our story
@@ -217,11 +217,6 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
           </motion.button>
         </motion.div>
       </motion.div>
-
-      {/* Static Background Decoration */}
-      <div className="fixed bottom-12 left-12 opacity-5 pointer-events-none">
-        <Heart size={200} fill="currentColor" className="text-red-600" />
-      </div>
     </div>
   );
 };

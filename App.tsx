@@ -17,7 +17,7 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<'landing' | 'wish' | 'letter' | 'nickname' | 'gallery' | 'final' | 'final-letter' | 'detailed-letter' | 'collage' | 'special-image' | 'quote' | 'wrap-up'>('landing');
 
   return (
-    <div className="min-h-screen bg-rose-50 overflow-hidden relative">
+    <div className="min-h-screen bg-rose-50 overflow-x-hidden overflow-y-auto relative">
       {currentPage === 'landing' && (
         <LandingPage onNext={() => setCurrentPage('wish')} />
       )}
