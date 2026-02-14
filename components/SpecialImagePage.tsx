@@ -48,7 +48,7 @@ const SpecialImagePage: React.FC<SpecialImagePageProps> = ({ onNext }) => {
     scale: 1.05,
     color: "#ffffff",
     textShadow: "0 0 25px rgba(255, 255, 255, 0.7), 0 0 10px rgba(220, 38, 38, 0.4)",
-    transition: { type: "spring", stiffness: 300, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 }
   };
 
   return (

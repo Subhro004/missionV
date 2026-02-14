@@ -43,7 +43,7 @@ const NicknamePage: React.FC<NicknamePageProps> = ({ onNext }) => {
     ],
     color: "#dc2626", // Red-600
     transition: { 
-      type: "spring", 
+      type: "spring" as const, 
       stiffness: 300, 
       damping: 15 
     }

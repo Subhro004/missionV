@@ -39,7 +39,7 @@ const LetterPage: React.FC<LetterPageProps> = ({ onNext }) => {
     x: 10,
     color: "#dc2626", // Red-600
     textShadow: "0 0 15px rgba(220, 38, 38, 0.2)",
-    transition: { type: "spring", stiffness: 300, damping: 20 }
+    transition: { type: "spring" as const, stiffness: 300, damping: 20 }
   };
 
   // Helper component for interactive sentences
